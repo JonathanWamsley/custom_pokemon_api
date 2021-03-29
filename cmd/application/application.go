@@ -6,11 +6,18 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
+	"github.com/jonathanwamsley/practice_apis/custom_pokemon_api/datasources/postgres/pokemon_db"
 )
 
 var router = mux.NewRouter()
 
 func Start() {
+
+	_, err := pokemon_db.NewDatabase()
+	if err != nil {
+		panic(err)
+	}
+
 	mapUrls()
 
 	srv := &http.Server{
